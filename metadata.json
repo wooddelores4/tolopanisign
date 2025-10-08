@@ -1,0 +1,7 @@
+{
+  "name": "TolopaniSign",
+  "description": "An application that translates Indonesian Sign Language into Indonesian text in real-time using the Gemini API. Simply point your camera at the signs to see the live translation.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
