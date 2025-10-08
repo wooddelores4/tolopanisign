@@ -97,7 +97,7 @@ const App: React.FC = () => {
                 }
               }
             }
-          }, 2000); // Capture frame every 2 seconds
+          }, 6000); // Capture frame every 6 seconds
         };
       }
     } catch (err) {

@@ -1,5 +1,5 @@
-
 import { GoogleGenAI } from "@google/genai";
+import { getFromCache, setInCache } from './cache';
 
 let ai: GoogleGenAI | null = null;
 
@@ -14,6 +14,11 @@ const getAI = () => {
 }
 
 export const translateImageToText = async (base64ImageData: string): Promise<string> => {
+    const cachedResult = getFromCache(base64ImageData);
+    if (cachedResult) {
+        return cachedResult;
+    }
+
     const geminiAI = getAI();
     
     const prompt = "Terjemahkan gestur bahasa isyarat Indonesia dalam gambar ini ke dalam teks Bahasa Indonesia. Berikan hanya teks terjemahannya, tanpa penjelasan tambahan. Jika isyarat tidak jelas, kembalikan string kosong.";
@@ -37,7 +42,9 @@ export const translateImageToText = async (base64ImageData: string): Promise<str
         });
         
         const text = response.text ?? '';
-        return text.trim();
+        const trimmedText = text.trim();
+        setInCache(base64ImageData, trimmedText);
+        return trimmedText;
 
     } catch (error) {
         console.error("Error calling Gemini API:", error);

@@ -15,6 +15,14 @@ View your app in AI Studio: https://ai.studio/apps/drive/10X_phktAjn3l7v2nAUXw9U
 
 1. Install dependencies:
    `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
+2. Set the `GEMINI_API_KEY` in `.env.local` to your Gemini API key.
 3. Run the app:
    `npm run dev`
+
+By default, the application will be available at `http://localhost:7030`.
+
+## Troubleshooting
+
+### Gemini API Rate Limiting
+
+The free tier of the Gemini API has a rate limit of 10 requests per minute. This application captures an image from the camera every 6 seconds to stay within this limit. If you encounter `429 (Too Many Requests)` errors, you can adjust the capture interval in `App.tsx`.
